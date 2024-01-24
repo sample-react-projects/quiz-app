@@ -1,1 +1,1 @@
-# Projects lister
+# Quiz app
