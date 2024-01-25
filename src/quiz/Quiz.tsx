@@ -1,7 +1,7 @@
 import "./App.scss";
 
-function App() {
+function Quiz() {
   return <></>;
 }
 
-export default App;
+export default Quiz;
