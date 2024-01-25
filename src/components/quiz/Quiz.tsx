@@ -1,4 +1,4 @@
-import "./App.scss";
+import styles from "./Quiz.module.scss";
 
 function Quiz() {
   return <></>;

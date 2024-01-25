@@ -14,7 +14,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
+    project: true,
     tsconfigRootDir: __dirname,
   },
   plugins: ["react-refresh"],

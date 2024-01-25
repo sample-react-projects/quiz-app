@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Quiz from "./quiz/Quiz.tsx";
+import Quiz from "./components/quiz/Quiz.tsx";
 import "./index.scss";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
