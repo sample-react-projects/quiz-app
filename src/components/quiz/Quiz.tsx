@@ -10,11 +10,14 @@ function Quiz() {
   return (
     <div className={styles.quiz}>
       <div className={styles.quiz__header}>
-        <h1>React Quiz</h1>
+        <h1 className={styles["quiz__header-title"]}>React Quiz</h1>
         <progress value={currentQuestionIndex} max={totalQuestions}></progress>
       </div>
       <div className={styles.quiz__question}>
         <QuestionRenderer question={currentQuestion}></QuestionRenderer>
+      </div>
+      <div className={styles.quiz__status}>
+        {currentQuestionIndex + 1} of {totalQuestions} Questions
       </div>
     </div>
   );
