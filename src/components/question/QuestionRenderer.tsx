@@ -3,7 +3,6 @@ import Option from "../option/Option";
 import styles from "./QuestionRenderer.module.scss";
 
 const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
-  
   return (
     <div className={styles.question}>
       <div className={styles.question__title}>Q. {question.question}</div>
@@ -11,13 +10,16 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
         {question.options.map((option, index) => (
           <Option
             key={option.id}
-            option={option.option}
+            {...option}
+            questionId={question.id}
             index={index}
             isCorrectAnswer={question.correctAnswer === option.id}
           />
         ))}
       </div>
-      <div className={styles.question__timer}><progress max={3} value={0}></progress></div>
+      <div className={styles.question__timer}>
+        <progress max={3} value={0}></progress>
+      </div>
     </div>
   );
 };
