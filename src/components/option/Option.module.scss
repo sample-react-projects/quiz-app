@@ -1,3 +1,7 @@
+.input {
+    display: none;
+}
+
 .option {
   background-color: #cbd5e1;
   border-radius: 1rem;
@@ -7,4 +11,15 @@
   &:hover {
     background-color: #94a3b8;
   }
+}
+
+.input:checked + .option {
+    background-color: #fecaca;
+    color: #dc2626;
+}
+
+
+.input:checked + .option__correct {
+    background-color: #bbf7d0;
+    color: #16a34a;
 }
