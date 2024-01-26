@@ -2,32 +2,33 @@
   box-shadow: 0 6px 15px rgba(36, 37, 38, 0.08);
   margin: 2rem auto;
   max-width: 700px;
+  position: relative;
   width: calc(100% - 4rem);
 
   &__header {
     align-items: center;
     background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
     border-radius: 0.5rem 0.5rem 0 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    justify-content: center;
-    height: 10em;
+    position: relative;
+
+    &-title {
+      text-align: center;
+      padding: 3rem 0;
+    }
 
     progress {
       appearance: none;
-      width: 70%;
+      height: 0.25rem;
+      position: absolute;
+      width: 100%;
 
       &::-webkit-progress-bar {
         appearance: none;
         background: #dbeafe;
-        border: 1px solid #1e40af;
-        border-radius: 1rem;
       }
 
       &::-webkit-progress-value {
         background: #1e40af;
-        border-radius: 1rem;
       }
     }
   }
@@ -36,5 +37,11 @@
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  &__status {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
   }
 }
