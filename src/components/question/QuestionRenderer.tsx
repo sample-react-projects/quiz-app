@@ -18,7 +18,7 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
         ))}
       </div>
       <div className={styles.question__timer}>
-        <progress max={3} value={0}></progress>
+        <progress max={3} value={3}></progress>
       </div>
     </div>
   );
