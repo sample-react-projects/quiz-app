@@ -29,7 +29,9 @@ const Option: React.FC<IOption> = ({
       onClick={handleOptionClick}
       className={`${styles.option} ${
         answeredOption === id
-          ? styles["option--answered-" + (isCorrectAnswer ? "right" : "wrong")]
+          ? styles["option--answered"] +
+            " " +
+            styles["option--answered-" + (isCorrectAnswer ? "right" : "wrong")]
           : ""
       }`}
     >

@@ -4,7 +4,7 @@
   cursor: pointer;
   padding: 1rem;
 
-  &:hover {
+  &:not(.option--answered):hover {
     background-color: #94a3b8;
   }
 
