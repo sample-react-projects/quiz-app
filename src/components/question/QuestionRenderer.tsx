@@ -15,7 +15,7 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
       <div className={styles.question__title}>Q. {question.question}</div>
       <div className={styles.question__options}>
         {question.options.map((option, index) => (
-          <Option
+          <OptionRenderer
             answeredOption={answeredOption}
             index={index}
             isCorrectAnswer={
