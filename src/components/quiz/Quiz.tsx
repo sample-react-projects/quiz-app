@@ -11,6 +11,13 @@ function Quiz() {
 
   const currentQuestionIndex = answerIds.length;
   const currentQuestion = questions[currentQuestionIndex];
+  let correctAnswersCount = 0;
+
+  if (currentQuestionIndex === totalQuestions) {
+    questions.forEach((question, index) => {
+      correctAnswersCount += +(question.correctAnswer === answerIds[index]);
+    });
+  }
 
   function handleAnswerSubmit(answer: string) {
     setAnswerIds((currentAnswers) => [...currentAnswers, answer]);
@@ -36,7 +43,10 @@ function Quiz() {
           </div>
         </>
       ) : (
-        <QuizResult></QuizResult>
+        <QuizResult
+          correctAnswersCount={correctAnswersCount}
+          totalQuestions={totalQuestions}
+        ></QuizResult>
       )}
     </div>
   );
