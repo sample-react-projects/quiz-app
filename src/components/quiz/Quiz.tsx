@@ -1,11 +1,19 @@
 import styles from "./Quiz.module.scss";
 import { questions } from "../../assets/questions";
 import QuestionRenderer from "../question/QuestionRenderer";
+import { useState } from "react";
+
+const totalQuestions = questions.length;
 
 function Quiz() {
-  const totalQuestions = 7;
-  const currentQuestionIndex = 2;
+  let [answerIds, setAnswerIds] = useState<string[]>([]);
+
+  const currentQuestionIndex = answerIds.length;
   const currentQuestion = questions[currentQuestionIndex];
+
+  function handleAnswerSubmit(answer: string) {
+    setAnswerIds((currentAnswers) => [...currentAnswers, answer]);
+  }
 
   return (
     <div className={styles.quiz}>
@@ -14,7 +22,11 @@ function Quiz() {
         <progress value={currentQuestionIndex} max={totalQuestions}></progress>
       </div>
       <div className={styles.quiz__question}>
-        <QuestionRenderer question={currentQuestion}></QuestionRenderer>
+        <QuestionRenderer
+          key={questions[currentQuestionIndex].id}
+          question={currentQuestion}
+          onAnswerSubmitted={handleAnswerSubmit}
+        ></QuestionRenderer>
       </div>
       <div className={styles.quiz__status}>
         {currentQuestionIndex + 1} of {totalQuestions} Questions
