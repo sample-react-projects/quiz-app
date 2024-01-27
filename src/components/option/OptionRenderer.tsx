@@ -3,24 +3,24 @@ interface IOption {
   id: string;
   index: number;
   isCorrectAnswer: boolean;
-  onOptionClick: () => void;
+  onOptionClicked: () => void;
   option: string;
 }
-import styles from "./Option.module.scss";
+import styles from "./OptionRenderer.module.scss";
 
-const Option: React.FC<IOption> = ({
+const OptionRenderer: React.FC<IOption> = ({
   answeredOption,
   id,
   index,
   isCorrectAnswer,
-  onOptionClick,
+  onOptionClicked,
   option,
 }) => {
   const prefix = String.fromCharCode(index + 97);
 
   function handleOptionClick() {
     if (!answeredOption) {
-      onOptionClick();
+      onOptionClicked();
     }
   }
 
@@ -40,4 +40,4 @@ const Option: React.FC<IOption> = ({
   );
 };
 
-export default Option;
+export default OptionRenderer;

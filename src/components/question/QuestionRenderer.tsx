@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { Question } from "../../models/Question";
-import Option from "../option/Option";
+import OptionRenderer from "../option/OptionRenderer";
 import styles from "./QuestionRenderer.module.scss";
 
-const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
+interface IQuestionRenderer {
+  question: Question;
+  onAnswerSubmitted: (answer: string) => void;
+}
+
+const QuestionRenderer: React.FC<IQuestionRenderer> = ({
+  question,
+  onAnswerSubmitted,
+}) => {
   let [answeredOption, setAnsweredOption] = useState<string>("");
 
   function onOptionClicked(optionId: string) {
     setAnsweredOption(optionId);
+    setTimeout(() => {
+      onAnswerSubmitted(optionId);
+    }, 1000);
   }
 
   return (
@@ -15,7 +26,7 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
       <div className={styles.question__title}>Q. {question.question}</div>
       <div className={styles.question__options}>
         {question.options.map((option, index) => (
-          <Option
+          <OptionRenderer
             answeredOption={answeredOption}
             index={index}
             isCorrectAnswer={
@@ -23,7 +34,7 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
               option.id === question.correctAnswer
             }
             key={option.id}
-            onOptionClick={onOptionClicked.bind(this, option.id)}
+            onOptionClicked={onOptionClicked.bind(this, option.id)}
             {...option}
           />
         ))}
