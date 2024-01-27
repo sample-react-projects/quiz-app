@@ -15,8 +15,11 @@ const QuestionRenderer: React.FC<IQuestionRenderer> = ({
 }) => {
   let [answeredOption, setAnsweredOption] = useState<string>("");
 
-  function onOptionClicked(optionId: string) {
-    setAnsweredOption(optionId);
+  function onOptionClicked(option: Option) {
+    setAnsweredOption(option.id);
+    setTimeout(() => {
+      onAnswerSubmitted(option.option);
+    }, 1000);
   }
 
   return (
