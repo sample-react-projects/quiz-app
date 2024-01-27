@@ -23,7 +23,7 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
               option.id === question.correctAnswer
             }
             key={option.id}
-            onOptionClick={onOptionClicked.bind(this, option.id)}
+            onOptionClicked={onOptionClicked.bind(this, option)}
             {...option}
           />
         ))}
