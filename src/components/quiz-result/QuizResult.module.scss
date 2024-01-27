@@ -1,0 +1,21 @@
+.result {
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 4rem 0 2rem 0;
+
+  &__restart {
+    all: unset;
+    background-color: #1e40af;
+    border-radius: 0.25rem;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+
+    &:hover {
+      background-color: #172554;
+    }
+  }
+}
