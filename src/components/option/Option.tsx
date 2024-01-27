@@ -1,5 +1,6 @@
 interface IOption {
-  answered: boolean;
+  answeredOption: string;
+  id: string;
   index: number;
   isCorrectAnswer: boolean;
   onOptionClick: () => void;
@@ -8,7 +9,8 @@ interface IOption {
 import styles from "./Option.module.scss";
 
 const Option: React.FC<IOption> = ({
-  answered,
+  answeredOption,
+  id,
   index,
   isCorrectAnswer,
   onOptionClick,
@@ -17,7 +19,7 @@ const Option: React.FC<IOption> = ({
   const prefix = String.fromCharCode(index + 97);
 
   function handleOptionClick() {
-    if (!answered) {
+    if (!answeredOption) {
       onOptionClick();
     }
   }
@@ -26,8 +28,8 @@ const Option: React.FC<IOption> = ({
     <div
       onClick={handleOptionClick}
       className={`${styles.option} ${
-        answered
-          ? "option--answered-" + (isCorrectAnswer ? "right" : "wrong")
+        answeredOption === id
+          ? styles["option--answered-" + (isCorrectAnswer ? "right" : "wrong")]
           : ""
       }`}
     >
