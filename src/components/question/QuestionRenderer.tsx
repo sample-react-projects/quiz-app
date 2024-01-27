@@ -1,19 +1,30 @@
+import { useState } from "react";
 import { Question } from "../../models/Question";
 import Option from "../option/Option";
 import styles from "./QuestionRenderer.module.scss";
 
 const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
+  let [answeredOption, setAnsweredOption] = useState<string>("");
+
+  function onOptionClicked(optionId: string) {
+    setAnsweredOption(optionId);
+  }
+
   return (
     <div className={styles.question}>
       <div className={styles.question__title}>Q. {question.question}</div>
       <div className={styles.question__options}>
         {question.options.map((option, index) => (
           <Option
-            key={option.id}
-            {...option}
-            questionId={question.id}
+            answeredOption={answeredOption}
             index={index}
-            isCorrectAnswer={question.correctAnswer === option.id}
+            isCorrectAnswer={
+              answeredOption === option.id &&
+              option.id === question.correctAnswer
+            }
+            key={option.id}
+            onOptionClick={onOptionClicked.bind(this, option.id)}
+            {...option}
           />
         ))}
       </div>

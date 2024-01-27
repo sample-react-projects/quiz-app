@@ -1,46 +1,42 @@
 interface IOption {
+  answeredOption: string;
   id: string;
   index: number;
   isCorrectAnswer: boolean;
+  onOptionClick: () => void;
   option: string;
-  questionId: string;
 }
-import { useState } from "react";
 import styles from "./Option.module.scss";
 
 const Option: React.FC<IOption> = ({
+  answeredOption,
   id,
   index,
-  option,
   isCorrectAnswer,
-  questionId,
+  onOptionClick,
+  option,
 }) => {
   const prefix = String.fromCharCode(index + 97);
-  const [answered, setAnswered] = useState<boolean>(false);
 
-  function handleOptionChange() {
-    setAnswered(true);
+  function handleOptionClick() {
+    if (!answeredOption) {
+      onOptionClick();
+    }
   }
 
   return (
-    <>
-      <input
-        type="radio"
-        className={styles.input}
-        disabled={answered}
-        name={questionId}
-        onChange={handleOptionChange}
-        id={id}
-      ></input>
-      <label
-        htmlFor={id}
-        className={`${styles.option} ${
-          isCorrectAnswer ? styles.option__correct : ""
-        }`}
-      >
-        {prefix}. {option}
-      </label>
-    </>
+    <div
+      onClick={handleOptionClick}
+      className={`${styles.option} ${
+        answeredOption === id
+          ? styles["option--answered"] +
+            " " +
+            styles["option--answered-" + (isCorrectAnswer ? "right" : "wrong")]
+          : ""
+      }`}
+    >
+      {prefix}. {option}
+    </div>
   );
 };
 
