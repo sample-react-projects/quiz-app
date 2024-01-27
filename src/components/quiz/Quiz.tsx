@@ -23,6 +23,10 @@ function Quiz() {
     setAnswerIds((currentAnswers) => [...currentAnswers, answer]);
   }
 
+  function restartQuiz() {
+    setAnswerIds([]);
+  }
+
   return (
     <div className={styles.quiz}>
       <div className={styles.quiz__header}>
@@ -45,6 +49,7 @@ function Quiz() {
       ) : (
         <QuizResult
           correctAnswersCount={correctAnswersCount}
+          restartQuiz={restartQuiz}
           totalQuestions={totalQuestions}
         ></QuizResult>
       )}
