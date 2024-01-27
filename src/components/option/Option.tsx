@@ -23,16 +23,16 @@ const Option: React.FC<IOption> = ({
   }
 
   return (
-    <>
-      <div
-        onClick={handleOptionClick}
-        className={`${styles.option} ${
-          isCorrectAnswer ? styles.option__correct : ""
-        }`}
-      >
-        {prefix}. {option}
-      </div>
-    </>
+    <div
+      onClick={handleOptionClick}
+      className={`${styles.option} ${
+        answered
+          ? "option--answered-" + (isCorrectAnswer ? "right" : "wrong")
+          : ""
+      }`}
+    >
+      {prefix}. {option}
+    </div>
   );
 };
 
