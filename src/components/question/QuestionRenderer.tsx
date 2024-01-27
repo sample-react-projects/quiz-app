@@ -1,9 +1,18 @@
 import { useState } from "react";
 import { Question } from "../../models/Question";
-import Option from "../option/Option";
+import OptionRenderer from "../option/OptionRenderer";
 import styles from "./QuestionRenderer.module.scss";
+import { Option } from "../../models/Option";
 
-const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
+interface IQuestionRenderer {
+  question: Question;
+  onAnswerSubmitted: (answer: string) => void;
+}
+
+const QuestionRenderer: React.FC<IQuestionRenderer> = ({
+  question,
+  onAnswerSubmitted,
+}) => {
   let [answeredOption, setAnsweredOption] = useState<string>("");
 
   function onOptionClicked(optionId: string) {
