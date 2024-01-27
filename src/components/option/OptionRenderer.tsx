@@ -6,9 +6,9 @@ interface IOption {
   onOptionClicked: () => void;
   option: string;
 }
-import styles from "./Option.module.scss";
+import styles from "./OptionRenderer.module.scss";
 
-const Option: React.FC<IOption> = ({
+const OptionRenderer: React.FC<IOption> = ({
   answeredOption,
   id,
   index,
@@ -40,4 +40,4 @@ const Option: React.FC<IOption> = ({
   );
 };
 
-export default Option;
+export default OptionRenderer;
