@@ -4,7 +4,7 @@ import Option from "../option/Option";
 import styles from "./QuestionRenderer.module.scss";
 
 const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
-  let [answeredOption, setAnsweredOption] = useState<string>();
+  let [answeredOption, setAnsweredOption] = useState<string>("");
 
   function onOptionClicked(optionId: string) {
     setAnsweredOption(optionId);
@@ -16,15 +16,15 @@ const QuestionRenderer: React.FC<{ question: Question }> = ({ question }) => {
       <div className={styles.question__options}>
         {question.options.map((option, index) => (
           <Option
-            answered={answeredOption === option.id}
+            answeredOption={answeredOption}
             index={index}
             isCorrectAnswer={
               answeredOption === option.id &&
-              question.correctAnswer === option.id
+              option.id === question.correctAnswer
             }
             key={option.id}
             onOptionClick={onOptionClicked.bind(this, option.id)}
-            option={option.option}
+            {...option}
           />
         ))}
       </div>
