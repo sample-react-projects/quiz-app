@@ -1,9 +1,7 @@
 .card {
-  align-items: center;
   background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  row-gap: 2rem;
-  min-height: 400px;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-sizing: border-box;
+  min-height: 300px;
   padding: 1rem;
 }
