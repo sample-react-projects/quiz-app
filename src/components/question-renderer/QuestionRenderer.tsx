@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Question } from "../../models/Question";
-import OptionRenderer from "../option/OptionRenderer";
+import OptionRenderer from "../option-renderer/OptionRenderer";
 import styles from "./QuestionRenderer.module.scss";
 
 interface IQuestionRenderer {
@@ -22,7 +22,7 @@ const QuestionRenderer: React.FC<IQuestionRenderer> = ({
   }
 
   return (
-    <div className={styles.question}>
+    <>
       <div className={styles.question__title}>Q. {question.question}</div>
       <div className={styles.question__options}>
         {question.options.map((option, index) => (
@@ -42,7 +42,7 @@ const QuestionRenderer: React.FC<IQuestionRenderer> = ({
       <div className={styles.question__timer}>
         <progress max={3} value={3}></progress>
       </div>
-    </div>
+    </>
   );
 };
 
