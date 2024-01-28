@@ -3,27 +3,30 @@ import { questions } from "../../assets/questions";
 import QuestionRenderer from "../question/QuestionRenderer";
 import { useState } from "react";
 import QuizResult from "../quiz-result/QuizResult";
+import Welcome from "../welcome/Welcome";
 
 const totalQuestions = questions.length;
 
 function Quiz() {
-  let [answerIds, setAnswerIds] = useState<string[]>([]);
+  let [answerIds, setAnswerIds] = useState<string[] | null>(null);
 
-  const currentQuestionIndex = answerIds.length;
+  const currentQuestionIndex = answerIds?.length ?? -1;
   const currentQuestion = questions[currentQuestionIndex];
   let correctAnswersCount = 0;
 
   if (currentQuestionIndex === totalQuestions) {
     questions.forEach((question, index) => {
-      correctAnswersCount += +(question.correctAnswer === answerIds[index]);
+      correctAnswersCount += +(
+        question.correctAnswer === (answerIds ? answerIds[index] : "")
+      );
     });
   }
 
   function handleAnswerSubmit(answer: string) {
-    setAnswerIds((currentAnswers) => [...currentAnswers, answer]);
+    setAnswerIds((currentAnswers) => [...(currentAnswers || []), answer]);
   }
 
-  function restartQuiz() {
+  function startQuiz() {
     setAnswerIds([]);
   }
 
@@ -33,7 +36,8 @@ function Quiz() {
         <h1 className={styles["quiz__header-title"]}>React Quiz</h1>
         <progress value={currentQuestionIndex} max={totalQuestions}></progress>
       </div>
-      {currentQuestionIndex < totalQuestions ? (
+      {currentQuestionIndex === -1 && <Welcome startQuiz={startQuiz}></Welcome>}
+      {currentQuestionIndex >= 0 && currentQuestionIndex < totalQuestions && (
         <>
           <div className={styles.quiz__question}>
             <QuestionRenderer
@@ -46,10 +50,11 @@ function Quiz() {
             {currentQuestionIndex + 1} of {totalQuestions} Questions
           </div>
         </>
-      ) : (
+      )}
+      {currentQuestionIndex === totalQuestions && (
         <QuizResult
           correctAnswersCount={correctAnswersCount}
-          restartQuiz={restartQuiz}
+          restartQuiz={startQuiz}
           totalQuestions={totalQuestions}
         ></QuizResult>
       )}
