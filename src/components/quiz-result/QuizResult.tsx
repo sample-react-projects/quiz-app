@@ -11,14 +11,14 @@ const QuizResult: React.FC<IQuizResult> = ({
   totalQuestions,
 }) => {
   return (
-    <div className={styles.result}>
+    <>
       <h2>
         You got {correctAnswersCount} out of {totalQuestions} correct!
       </h2>
       <button className={styles["result__restart"]} onClick={restartQuiz}>
         Restart
       </button>
-    </div>
+    </>
   );
 };
 

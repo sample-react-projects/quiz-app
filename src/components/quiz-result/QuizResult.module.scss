@@ -1,11 +1,4 @@
 .result {
-  align-items: center;
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  padding: 4rem 0 2rem 0;
-
   &__restart {
     all: unset;
     background-color: #1e40af;
