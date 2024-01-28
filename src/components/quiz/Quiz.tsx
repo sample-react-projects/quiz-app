@@ -36,7 +36,7 @@ function Quiz() {
         <h1 className={styles["quiz__header-title"]}>React Quiz</h1>
         <progress value={currentQuestionIndex} max={totalQuestions}></progress>
       </div>
-      {currentQuestionIndex === -1 && <Welcome></Welcome>}
+      {currentQuestionIndex === -1 && <Welcome startQuiz={startQuiz}></Welcome>}
       {currentQuestionIndex >= 0 && currentQuestionIndex < totalQuestions && (
         <>
           <div className={styles.quiz__question}>
