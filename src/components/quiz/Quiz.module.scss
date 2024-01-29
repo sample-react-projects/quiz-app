@@ -20,6 +20,10 @@
       height: 0.25rem;
       position: absolute;
       width: 100%;
+
+      &::-webkit-progress-value {
+        transition: width 0.5s linear;
+      }
     }
   }
 
