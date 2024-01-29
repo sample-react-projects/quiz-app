@@ -16,3 +16,19 @@ body {
 h1 {
   margin: 0;
 }
+
+progress {
+  appearance: none;
+
+  &::-webkit-progress-bar {
+    appearance: none;
+    background-color: #dbeafe;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-progress-value {
+    background-color: #1e40af;
+    border-radius: 1rem;
+    transition: width 0.5s;
+  }
+}
