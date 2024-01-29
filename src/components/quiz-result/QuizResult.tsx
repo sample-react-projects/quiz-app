@@ -1,3 +1,4 @@
+import Button from "../ui/button/Button";
 import styles from "./QuizResult.module.scss";
 
 interface IQuizResult {
@@ -15,9 +16,7 @@ const QuizResult: React.FC<IQuizResult> = ({
       <h2>
         You got {correctAnswersCount} out of {totalQuestions} correct!
       </h2>
-      <button className={styles["result__restart"]} onClick={restartQuiz}>
-        Restart
-      </button>
+      <Button onClick={restartQuiz}>Restart</Button>
     </div>
   );
 };
