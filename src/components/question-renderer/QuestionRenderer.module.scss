@@ -18,6 +18,15 @@
     progress {
       height: 0.5rem;
       width: 200px;
+
+      &::-webkit-progress-bar {
+        border-radius: 1rem;
+      }
+
+      &::-webkit-progress-value {
+        border-radius: 1rem;
+        transition: width 0.1s linear;
+      }
     }
   }
 }

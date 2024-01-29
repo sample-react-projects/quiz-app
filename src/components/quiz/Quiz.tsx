@@ -3,32 +3,36 @@ import { questions } from "../../assets/questions";
 import QuestionRenderer from "../question-renderer/QuestionRenderer";
 import { useState } from "react";
 import QuizResult from "../quiz-result/QuizResult";
-import Welcome from "../welcome/Welcome";
 import Card from "../ui/card/Card";
 
 const totalQuestions = questions.length;
 
 function Quiz() {
-  let [answerIds, setAnswerIds] = useState<string[] | null>(null);
-
-  const currentQuestionIndex = answerIds?.length ?? -1;
+  const [answerIds, setAnswerIds] = useState<Map<string, string>>(
+    new Map<string, string>()
+  );
+  const currentQuestionIndex = answerIds.size;
   const currentQuestion = questions[currentQuestionIndex];
+
   let correctAnswersCount = 0;
 
   if (currentQuestionIndex === totalQuestions) {
-    questions.forEach((question, index) => {
+    questions.forEach((question) => {
       correctAnswersCount += +(
-        question.correctAnswer === (answerIds ? answerIds[index] : "")
+        question.correctAnswer === answerIds.get(question.id)
       );
     });
   }
 
   function handleAnswerSubmit(answer: string) {
-    setAnswerIds((currentAnswers) => [...(currentAnswers || []), answer]);
+    setAnswerIds((currentAnswerIds) => {
+      currentAnswerIds.set(currentQuestion.id, answer);
+      return new Map(currentAnswerIds);
+    });
   }
 
   function startQuiz() {
-    setAnswerIds([]);
+    setAnswerIds(new Map<string, string>());
   }
 
   return (
@@ -38,10 +42,7 @@ function Quiz() {
         <progress value={currentQuestionIndex} max={totalQuestions}></progress>
       </div>
       <Card>
-        {currentQuestionIndex === -1 && (
-          <Welcome startQuiz={startQuiz}></Welcome>
-        )}
-        {currentQuestionIndex >= 0 && currentQuestionIndex < totalQuestions && (
+        {currentQuestionIndex < totalQuestions ? (
           <>
             <div className={styles.quiz__question}>
               <QuestionRenderer
@@ -54,8 +55,7 @@ function Quiz() {
               {currentQuestionIndex + 1} of {totalQuestions} Questions
             </div>
           </>
-        )}
-        {currentQuestionIndex === totalQuestions && (
+        ) : (
           <QuizResult
             correctAnswersCount={correctAnswersCount}
             restartQuiz={startQuiz}

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Question } from "../../models/Question";
 import OptionRenderer from "../option-renderer/OptionRenderer";
 import styles from "./QuestionRenderer.module.scss";
+
+const TIME_TO_ANSWER = 4000;
 
 interface IQuestionRenderer {
   question: Question;
@@ -12,13 +14,37 @@ const QuestionRenderer: React.FC<IQuestionRenderer> = ({
   question,
   onAnswerSubmitted,
 }) => {
-  let [answeredOption, setAnsweredOption] = useState<string>("");
+  const [answeredOption, setAnsweredOption] = useState<string>("");
+  const [timeRemaining, setTimeRemaining] = useState<number>(TIME_TO_ANSWER);
+  let intervalId = useRef<number>();
 
-  function onOptionClicked(optionId: string) {
+  useEffect(() => {
+    function registerTimer() {
+      setTimeRemaining((currentTimeRemaining) => {
+        if (currentTimeRemaining === 100) {
+          registerAnswer("");
+        }
+
+        return currentTimeRemaining - 100;
+      });
+    }
+
+    intervalId.current = setInterval(registerTimer, 100);
+
+    return () => {
+      clearInterval(intervalId.current);
+    };
+  }, []);
+
+  function registerAnswer(optionId: string) {
+    clearInterval(intervalId.current);
     setAnsweredOption(optionId);
-    setTimeout(() => {
-      onAnswerSubmitted(optionId);
-    }, 1000);
+    setTimeout(
+      () => {
+        onAnswerSubmitted(optionId);
+      },
+      optionId ? 1000 : 0
+    );
   }
 
   return (
@@ -34,13 +60,13 @@ const QuestionRenderer: React.FC<IQuestionRenderer> = ({
               option.id === question.correctAnswer
             }
             key={option.id}
-            onOptionClicked={onOptionClicked.bind(this, option.id)}
+            onOptionClicked={registerAnswer.bind(this, option.id)}
             {...option}
           />
         ))}
       </div>
       <div className={styles.question__timer}>
-        <progress max={3} value={3}></progress>
+        <progress max={TIME_TO_ANSWER} value={timeRemaining}></progress>
       </div>
     </>
   );
