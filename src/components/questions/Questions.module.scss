@@ -2,6 +2,7 @@
   &__progress {
     height: 0.25rem;
     position: absolute;
+    top: 0;
     width: 100%;
 
     &::-webkit-progress-value {
