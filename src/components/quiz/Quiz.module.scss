@@ -9,34 +9,10 @@
     align-items: center;
     background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
     border-radius: 0.5rem 0.5rem 0 0;
-    position: relative;
 
     &-title {
       text-align: center;
       padding: 3rem 0;
     }
-
-    progress {
-      height: 0.25rem;
-      position: absolute;
-      width: 100%;
-
-      &::-webkit-progress-value {
-        transition: width 0.5s linear;
-      }
-    }
-  }
-
-  &__question {
-    display: flex;
-    flex-direction: column;
-    row-gap: 2rem;
-    width: 100%;
-  }
-
-  &__status {
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
   }
 }
