@@ -1,9 +1,13 @@
 import { PropsWithChildren } from "react";
 import styles from "./Button.module.scss";
 
-const Button: React.FC<PropsWithChildren> = ({ children, ...props }) => {
+interface IButton extends PropsWithChildren {
+  [key: string]: any;
+}
+
+const Button: React.FC<IButton> = ({ children, ...props }) => {
   return (
-    <button className="button" {...props}>
+    <button className={styles.button} {...props}>
       {children}
     </button>
   );
