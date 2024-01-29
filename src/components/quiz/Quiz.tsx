@@ -8,26 +8,31 @@ import Card from "../ui/card/Card";
 const totalQuestions = questions.length;
 
 function Quiz() {
-  let [answerIds, setAnswerIds] = useState<string[] | null>(null);
-
-  const currentQuestionIndex = answerIds?.length ?? -1;
+  const [answerIds, setAnswerIds] = useState<Map<string, string>>(
+    new Map<string, string>()
+  );
+  const currentQuestionIndex = answerIds.size;
   const currentQuestion = questions[currentQuestionIndex];
+
   let correctAnswersCount = 0;
 
   if (currentQuestionIndex === totalQuestions) {
-    questions.forEach((question, index) => {
+    questions.forEach((question) => {
       correctAnswersCount += +(
-        question.correctAnswer === (answerIds ? answerIds[index] : "")
+        question.correctAnswer === answerIds.get(question.id)
       );
     });
   }
 
   function handleAnswerSubmit(answer: string) {
-    setAnswerIds((currentAnswers) => [...(currentAnswers || []), answer]);
+    setAnswerIds((currentAnswerIds) => {
+      currentAnswerIds.set(currentQuestion.id, answer);
+      return new Map(currentAnswerIds);
+    });
   }
 
   function startQuiz() {
-    setAnswerIds([]);
+    setAnswerIds(new Map<string, string>());
   }
 
   return (
